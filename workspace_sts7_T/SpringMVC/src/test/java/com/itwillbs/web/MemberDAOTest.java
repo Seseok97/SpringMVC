@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.itwillbs.domain.MemberVO;
 import com.itwillbs.persistance.MemberDAO;
+
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,7 +44,7 @@ public class MemberDAOTest {
 
 	}// method end
 
-	@Test
+//	@Test
 	public void 로그레벨테스트() throws Exception{
 //		logger.fatal("fatal"); // 시스템레벨의 로그라서 출력이 안됨.
 		logger.error("error");
@@ -53,6 +55,86 @@ public class MemberDAOTest {
 		
 	}// method end
 	
+//	@Test
+	public void 회원가입테스트() throws Exception{
+		logger.debug("뷰에서 정보 입력받음!");
+		
+		MemberVO vo = new MemberVO();
+		vo.setUser_id("test5");
+		vo.setUser_pw("5555");
+		vo.setUser_name("test5");
+		vo.setUser_email("5@5.com");
+		
+		logger.debug("회원가입 완료");
+		// DAO객체 주입
+		mdao.insertMember(vo);
+		
+		
+	}// method end
+//	@Test
+	public void 로그인테스트() throws Exception{
+		logger.debug("로그인 테스트 시작!");
+		
+		// 로그인계정
+		MemberVO vo = new MemberVO();
+		vo.setUser_id("test1");
+		vo.setUser_pw("1112");
+		
+		//DAO > 로그인 체크 메서드 호출
+		MemberVO resultVO = mdao.loginMember(vo); // 주입된 메서드 객체를 호출한다.
+		if(resultVO == null) {
+			logger.debug("login fail");
+		}else {
+			logger.debug("login success");
+		}// i-e end
+		
+		
+		logger.debug("로그인 테스트 끝!");
+	}// method end
+	
+//	@Test
+	public void 회원정보수정테스트() throws Exception{
+		logger.debug("회원정보수정 테스트 시작![]~(￣▽￣ )~*");
+		
+		// 수정할 회원정보
+		MemberVO uvo = new MemberVO();
+		uvo.setUser_id("test1");
+		uvo.setUser_pw("1111");
+		uvo.setUser_name("test1");
+		uvo.setUser_email("1@1.com");
+		
+		// DAO
+		Integer result
+			= mdao.updateMember(uvo);
+		if(result == 1) {
+			logger.debug("정상 수정!");
+		}else {
+			logger.debug("오류 !");
+		}// i-e end
+		
+		logger.debug("회원정보수정 테스트 끝!*~( ￣▽￣)~[]");
+	}// method end
+	
+	@Test
+	public void 회원정보삭제테스트() throws Exception{
+		logger.debug("회원정보삭제 테스트 시작![]~(￣▽￣ )~*");
+		
+		// 삭제할 회원 정보
+		MemberVO dvo = new MemberVO();
+		dvo.setUser_id("test5");
+		dvo.setUser_pw("5555");
+		
+		//DAO
+		Integer result
+			= mdao.deleteMember(dvo);
+		if(result == 1) {
+			logger.debug("정상 삭제!");
+		}else {
+			logger.debug("오류 !");
+		}// i-e end
+
+		logger.debug("회원정보삭제 테스트 끝!*~( ￣▽￣)~[]");
+	}// method end
 	
 	
 	

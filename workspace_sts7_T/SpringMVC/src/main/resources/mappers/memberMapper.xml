@@ -10,5 +10,32 @@
   		select now()
   	</select>
   	<!-- 시간정보 조회 -->
+  	
+  	<!-- 회원가입 동작 -->
+  	<insert id="insertMember">
+  		insert into tbl_member (user_id, user_pw, user_name, user_email) 
+  		values (#{user_id},#{user_pw},#{user_name},#{user_email})
+  	</insert>
+  	<!-- 회원가입 동작 -->
+  	
+  	<!-- 로그인 -->
+  	<select id="login" resultType="com.itwillbs.domain.MemberVO">
+  		select * from tbl_member 
+  		where user_id=#{user_id} and user_pw=#{user_pw}
+  	</select>
+  	<!-- 로그인 -->
+  	
+  	<!-- 회원정보 수정 -->
+  	<update id="update">
+  		update tbl_member set user_name=#{user_name},user_email=#{user_email},updatedate=now() 
+  		where user_id=#{user_id} and user_pw=#{user_pw}
+  	</update>
+  	<!-- 회원정보 수정 -->
+  	
+  	<!-- 회원정보 삭제 -->
+  	<delete id="delete">
+  		delete from tbl_member where user_id=#{user_id} and user_pw=#{user_pw} 
+  	</delete>
+  	<!-- 회원정보 삭제 -->
   
   </mapper>
