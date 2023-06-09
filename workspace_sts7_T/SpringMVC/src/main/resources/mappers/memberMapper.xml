@@ -37,5 +37,17 @@
   		delete from tbl_member where user_id=#{user_id} and user_pw=#{user_pw} 
   	</delete>
   	<!-- 회원정보 삭제 -->
+  	
+  	<!-- 회원정보 조회 -->
+  	<select id="getMember" resultType="com.itwillbs.domain.MemberVO">
+  		SELECT * FROM tbl_member WHERE user_id=#{id}
+  	</select>
+  	<!-- 회원정보 조회 -->
+  	
+  	 <!-- 회원정보 목록 -->
+  	<select id="memberList" resultType="com.itwillbs.domain.MemberVO">
+  		SELECT * FROM tbl_member
+  	</select>
+  	<!-- 회원정보 목록 -->
   
   </mapper>
