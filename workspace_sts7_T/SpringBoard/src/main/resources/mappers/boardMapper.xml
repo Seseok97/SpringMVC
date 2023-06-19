@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.itwillbs.mapper.BoardMapper">
+  	<!-- VO객체 정보 매핑 -->
+  	<resultMap type="com.itwillbs.domain.BoardVO" id="board">
+  		<result property="bno" column="bno"/>
+  		<result property="content" column="content"/>
+  	</resultMap>
+  	<!-- VO객체 정보 매핑 -->
+  	
+  	<!-- 글쓰기 -->
+  	<insert id="create">
+  		INSERT InTO tbl_board(title, writer, content) 
+  		VALUES (#{title},#{writer},#{content})
+  	</insert>
+  	<!-- 글쓰기 -->
+  	
+  	<!-- 게시글 리스트 조회 -->
+  	<select id="listAll" resultType="BoardVO" resultMap="board">
+  		SELECT * FROM tbl_board
+  	</select>
+  	<!-- 게시글 리스트 조회 -->
+  	
+  	<!-- 조회수 1증가 -->
+  	<update id="upViewcnt">
+  		UPDATE tbl_board SET viewcnt = viewcnt+1 
+  		WHERE bno = #{bno}
+  	</update>
+  	<!-- 조회수 1증가 -->
+  	
+  	<!-- 글 조회 -->
+  	<select id="readBoard" resultType="BoardVO" resultMap="board">
+  		SELECT * FROM tbl_board WHERE bno = #{bno}
+  	</select>
+  	<!-- 글 조회 -->
+  	
+  	<!-- 글 수정 -->
+  	<update id="updateBoard">
+  		UPDATE tbl_board 
+  		SET title=#{title}, writer=#{writer}, content=#{content} 
+  		WHERE bno=#{bno}
+  	</update>
+  	<!-- 글 수정 -->
+  	
+  	<!-- 글 삭제 -->
+  	<delete id="deleteBoard">
+	  	DELETE FROM tbl_board 
+	  	WHERE bno=#{bno}
+  	</delete>
+  	<!-- 글 삭제 -->
+  	
+  </mapper>
